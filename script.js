@@ -1,12 +1,11 @@
+// script.js
 
 document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.getElementById('add-task-btn');
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
 
-    /**
-     * Adds a new task to the task list.
-     */
+  
     function addTask() {
         const taskText = taskInput.value.trim();
 
@@ -18,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create new list item
         const li = document.createElement('li');
 
-        // Create a span to hold the task text (to avoid overwriting when appending button)
+        // Create a span to hold the task text (prevents overwriting when appending button)
         const taskSpan = document.createElement('span');
         taskSpan.textContent = taskText;
         li.appendChild(taskSpan);
