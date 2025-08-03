@@ -3,19 +3,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
 
+    /* Loads tasks from Local Storage and populates the task list.*/
     function loadTasks() {
         const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
         storedTasks.forEach(taskText => addTask(taskText, false));
     }
 
-      function addTask(taskText, save = true) {
-        if (!taskText || taskText.trim() === "") {
+
+    function addTask(taskText, save = true) {
+        // If taskText is not provided (called from button or Enter key), get from input and trim
+        if (typeof taskText !== 'string') {
+            taskText = taskInput.value.trim();
+        } else {
+            taskText = taskText.trim();
+        }
+
+        if (taskText === "") {
             if (save) alert("Please enter a task.");
             return;
         }
 
         const li = document.createElement('li');
 
+        // Use a span to hold the task text to avoid overwriting when appending button
         const taskSpan = document.createElement('span');
         taskSpan.textContent = taskText;
         li.appendChild(taskSpan);
@@ -38,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-  
+    /*Updates the tasks array in Local Storage based on current DOM tasks.*/
     function updateLocalStorage() {
         const tasks = [];
         taskList.querySelectorAll('li span').forEach(span => {
@@ -49,12 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event listeners
     addButton.addEventListener('click', () => {
-        addTask(taskInput.value);
+        addTask();
     });
 
     taskInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
-            addTask(taskInput.value);
+            addTask();
         }
     });
 
