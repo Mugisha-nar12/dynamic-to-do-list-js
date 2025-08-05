@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
 
-    /* Loads tasks from Local Storage and populates the task list.*/
+   
     function loadTasks() {
         const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
         storedTasks.forEach(taskText => addTask(taskText, false));
@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function addTask(taskText, save = true) {
-        // If taskText is not provided (called from button or Enter key), get from input and trim
         if (typeof taskText !== 'string') {
             taskText = taskInput.value.trim();
         } else {
